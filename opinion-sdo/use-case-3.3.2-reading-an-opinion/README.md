@@ -2,7 +2,7 @@
 
 To run this example, please run `pipenv install` first, then:
 ```bash
-./judge_intel.py -i sample.json
+./read_intel.py -i sample.json
 ```
 
 
