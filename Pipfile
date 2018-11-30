@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+"stix2" = {editable = true, ref = "stix2.1", git = "https://github.com/oasis-open/cti-python-stix2.git"}
+click = "*"
+npyscreen = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
