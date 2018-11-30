@@ -4,3 +4,8 @@ To run this example, please run `pipenv install` first, then:
 ```bash
 ./judge_intel.py -i sample.json
 ```
+
+
+# Screencast
+
+![screencast](./screencast.gif?raw=true "Screencast")
