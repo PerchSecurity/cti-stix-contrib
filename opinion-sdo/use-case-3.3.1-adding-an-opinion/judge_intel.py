@@ -34,7 +34,6 @@ class IndicatorEvaluationApplication(npyscreen.NPSAppManaged):
 
     def on_identity_selected(self, identity: stix2.Identity):
         self.set_identity(identity)
-
         self.switchForm('INDICATORS')
 
     def onStart(self):
@@ -77,14 +76,7 @@ class IdentitySelection(npyscreen.MultiSelectAction):
                 f'\t{identity.id}'
             )
 
-    def get_identity(self) -> stix2.Identity:
-        objects = self.get_selected_objects()
-        if objects:
-            (identity,) = objects
-            return identity
-
-    def actionHighlighted(self, act_on_this, key_press):
-        identity = self.get_identity()
+    def actionHighlighted(self, identity, key_press):
         parent_app: IndicatorEvaluationApplication = self.find_parent_app()
 
         if identity is None:
@@ -187,10 +179,14 @@ class IndicatorEvaluationForm(npyscreen.ActionForm):
         )
 
     def on_ok(self):
+        parent_app = self.find_parent_app()
+        identity = parent_app.identity
+
         opinion = stix2.Opinion(
             object_refs=[self.indicator],
             opinion=self.opinion.value,
             explanation=self.explanation.value,
+            created_by_ref=identity,
         )
         self.bundle.objects.append(opinion)
         self.on_save(opinion)
